@@ -1,23 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
 
+import { addCashActionCreator, getCashActionCreator } from './store/reducers/cashReducer';
+import { useDispatch, useSelector } from 'react-redux';
+
 function App() {
+  const addCash = (cash) => {
+    dispatch(addCashActionCreator(cash))
+  }
+  const getCash = (cash) => {
+    dispatch(getCashActionCreator(cash))
+  }
+  const dispatch = useDispatch()
+  const cash = useSelector(state => state.cash)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>{cash}</h1>
+      <button onClick={() => addCash(Number(prompt('Enter number')))}>Add Cash</button>
+      <button onClick={() => getCash(Number(prompt('Enter number')))}>Get Cash</button>
     </div>
   );
 }
